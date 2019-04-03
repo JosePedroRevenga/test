@@ -1,0 +1,28 @@
+*{
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+
+    background-color: #333;
+    padding: 3.5%;
+    color: #FFF;
+    text-align: center;
+}
+section{
+
+    padding: 5%;
+    color: #00F;
+    font-size: calc(12px + 1vw);
+    text-align: center;
+}
+footer{
+
+    background-color: #333;
+    color: #FFF;
+    padding: 5%;
+    text-align: center;
+    font-weight: bold;
+    font-size: calc(12px + 1vw);
+}
