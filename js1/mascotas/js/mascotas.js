@@ -41,10 +41,10 @@ function imprimirMascotas(panclaje){
 
         impresion += `
         <li>
-            <p>Identificador: ${mascotas[i].id}</p>
-            <p>Nombre: ${mascotas[i].nombre}</p>
+            <p class='mid' data-mid="${mascotas[i].id}">Identificador: ${mascotas[i].id}</p>
+            <p class='mnombre' data-mnombre="${mascotas[i].nombre}">Nombre: ${mascotas[i].nombre}</p>
             <p>Edad: ${mascotas[i].edad}</p>
-            <p>Tasa de adopción: ${mascotas[i].precio}€</p>
+            <p class='mprecio' data-mprecio="${mascotas[i].precio}">Tasa de adopción: ${mascotas[i].precio}€</p>
             <span><button class='btn-comprar' data-id="${mascotas[i].id}">¡Adoptar!</button></span>
         </li>
         `;
@@ -55,12 +55,43 @@ function imprimirMascotas(panclaje){
     panclaje.innerHTML = impresion;
 
     document.querySelectorAll('.btn-comprar').forEach(function(btn){
-        const id = btn.dataset.id;
-        btn.onclick = function(){alert('Añadido ' + id + ' al proceso de adopción.')};
-
-
+        btn.onclick = function(){
+            comprarMascota(this.parentElement.parentElement);
+        }
+        
     });
 };
+
+function comprarMascota(mascotaElement){
+                                                        //Declaración constantes a usar
+
+    // const carrito = document.getElementById('carrito');
+    const mnombre = mascotaElement.querySelector('.mnombre').dataset.mnombre;
+    const mprecio = mascotaElement.querySelector('.mprecio').dataset.mprecio;
+    // const mid = mascotaElement.querySelector('.mid').dataset.mid;
+    const boton = mascotaElement.querySelector('.btn-comprar');
+
+                                                        //Creación elementos de la lista carrito
+    const mascotaSeleccionada = document.querySelector('#carrito>ol').appendChild(document.createElement('li'));
+
+                                                        //Estilos botón y mascotaSeleccionada
+
+    mascotaElement.setAttribute('class', 'mascota-seleccionada');
+
+                                                //Seguridad botón
+    boton.disabled = true;
+    boton.onclick = "";
+                                            //Impresión en pantalla del contenido del carrito
+
+    mascotaSeleccionada.innerHTML = mnombre + ' ' + mprecio + '€';
+
+    };
+
                             //Llamada a función al abrir ventana
 imprimirMascotas(panclaje);
-})(document.body.children[0].children[0]);
+
+
+})(document.body.children[1].children[0]);
+
+
+
