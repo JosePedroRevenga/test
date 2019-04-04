@@ -1,17 +1,20 @@
 (function(panclaje){
-
-                                            //Array con varios nombres como valor para su uso en generadorNombres()
-
-        const nombres = ['missy', 'rex', 'dog', 'bob', 'luna', 'max', 'sebes', 'ginna', 'balto', 'taxi'];
+                            //Constante carrito
+    const carrito=[];
+                    
 
     function generadorNombres(){
+
+                             //Array con varios nombres como valor para su uso en generadorNombres()
+
+         const nombres = ['missy', 'rex', 'dog', 'bob', 'luna', 'max', 'sebes', 'ginna', 'balto', 'taxi'];
 
                                             //variable nmascota adopta valor aleatorio del array nombres
 
         let nmascota = nombres[Math.floor(Math.random() * nombres.length)];
 
         return nmascota;
-    }
+    };
     function generadorMascotas(){
 
                             //Declaración array que almacenará los objetos mascota
@@ -25,9 +28,9 @@
     }
                             //Return de array con propiedades asignadas
     return mascotas;
-};
+    };
 
-function imprimirMascotas(panclaje){
+    function imprimirMascotas(panclaje){
 
                             //String para almacenar el contenido de mascotas para posterior impresión en pantalla
 
@@ -60,30 +63,46 @@ function imprimirMascotas(panclaje){
         }
         
     });
-};
+    };
 
-function comprarMascota(mascotaElement){
+    function comprarMascota(mascotaElement){
+
+                                                //Comprobación mascota no ya seleccionada (comparando la id de la mascota)
+
+        const mid = mascotaElement.querySelector('.mid').dataset.mid;
+        const yaselected = carrito.includes(mid);
+
+        if(!yaselected){
                                                         //Declaración constantes a usar
 
-    // const carrito = document.getElementById('carrito');
-    const mnombre = mascotaElement.querySelector('.mnombre').dataset.mnombre;
-    const mprecio = mascotaElement.querySelector('.mprecio').dataset.mprecio;
-    // const mid = mascotaElement.querySelector('.mid').dataset.mid;
-    const boton = mascotaElement.querySelector('.btn-comprar');
+            const mnombre = mascotaElement.querySelector('.mnombre').dataset.mnombre;
+            const mprecio = mascotaElement.querySelector('.mprecio').dataset.mprecio;
+            
+            const boton = mascotaElement.querySelector('.btn-comprar');
 
-                                                        //Creación elementos de la lista carrito
-    const mascotaSeleccionada = document.querySelector('#carrito>ol').appendChild(document.createElement('li'));
+            carrito.push(mid);
 
-                                                        //Estilos botón y mascotaSeleccionada
+                                                    //Creación elementos de la lista carrito
 
-    mascotaElement.setAttribute('class', 'mascota-seleccionada');
+            const mascotaSeleccionada = document.querySelector('#carrito>ol').appendChild(document.createElement('li'));
 
-                                                //Seguridad botón
-    boton.disabled = true;
-    boton.onclick = "";
-                                            //Impresión en pantalla del contenido del carrito
+                                                    //Estilos botón y mascotaSeleccionada
 
-    mascotaSeleccionada.innerHTML = mnombre + ' ' + mprecio + '€';
+            mascotaElement.setAttribute('class', 'mascota-seleccionada');
+
+                                                    //Seguridad botón
+            // boton.disabled = true;
+            // boton.onclick = "";
+
+                                                    //Impresión en pantalla del contenido del carrito
+
+            mascotaSeleccionada.innerHTML = mnombre + ' ' + mprecio + '€';
+
+        }else{
+        
+            console.log('Carrito: ya añadido ', mid);
+            
+        }
 
     };
 
